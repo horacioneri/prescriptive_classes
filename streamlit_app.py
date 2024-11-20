@@ -24,20 +24,23 @@ if current_page == 0:
     #    st.info('Lorem Ipsum...')
     
     left, right = st.columns(2)
-    if right.button("Next", use_container_width=True):
+    if right.button("Next", use_container_width=True, key="next_0"):
         change_page(1)
 elif 0 < current_page <= 5:
     st.title(page_title[current_page])
     # Sidebar for accepting input parameters
     with st.sidebar:
         st.header('Your Answer')
-        for i in range(0,5,1):
-            st.session_state.answers[i] = st.number_input("Insert the space allocated to " + business_units[i])
+        for i in range(len(business_units)):
+            st.session_state.answers[i] = st.number_input(
+                f"Insert the space allocated to {business_units[i]}",
+                key=f"answer_{i}"
+            )
             
     left, right = st.columns(2)
-    if left.button("Previous", use_container_width=True):
+    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
         change_page(-1)
-    if right.button("Next", use_container_width=True):
+    if right.button("Next", use_container_width=True, key=f"next_{current_page}"):
         change_page(1)
 # Restart if needed
 else:
