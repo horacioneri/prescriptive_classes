@@ -13,7 +13,7 @@ st.set_page_config(page_title='Understanding optimization', page_icon='')
 # Navigation function with forced rerun
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
-    st.experimental_rerun()  # Force immediate rerun to reflect the updated page state
+    st.rerun()  # Force immediate rerun to reflect the updated page state
 
 # Display current page content
 current_page = st.session_state.page
