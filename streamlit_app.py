@@ -20,6 +20,7 @@ current_page = st.session_state.page
 if current_page == 0:
     st.title(page_title[current_page])
     st.write(current_page)
+    st.write(st.__version__)
 
     left, right = st.columns(2)
     if right.button("Next", use_container_width=True, key="next_0"):
