@@ -1,4 +1,6 @@
 import streamlit as st
+import plotly.graph_objects as go
+import numpy as np
 
 # Initialize session state variables
 if "page" not in st.session_state:
@@ -7,6 +9,8 @@ if "page" not in st.session_state:
 
 page_title = ['Introduction', 'Basis of optimization', 'Constraints 1', 'Constraints 2', 'Objective function 1', 'Objective function 2']
 business_units = ['Beverages', 'Snacks', 'Hygiene', 'Fresh products', 'Other']
+linear_space_elasticities = [5, 1, 2, 4, 0.5]
+
 
 st.set_page_config(page_title='Understanding optimization', page_icon='')
 
@@ -19,8 +23,7 @@ def change_page(delta):
 current_page = st.session_state.page
 if current_page == 0:
     st.title(page_title[current_page])
-    st.write(current_page)
-    st.write(st.__version__)
+    st.write('Intro to the exercise')
 
     left, right = st.columns(2)
     if right.button("Next", use_container_width=True, key="next_0"):
@@ -43,6 +46,28 @@ elif 0 < current_page <= 5:
         change_page(-1)
     if right.button("Next", use_container_width=True, key=f"next_{current_page}"):
         change_page(1)
+
+    st.header('Elasticity curves', divider='rainbow')
+    col = st.columns(len(business_units))
+    for i in range(len(business_units)):
+        with col[i]:
+            x = range(0,500,1)
+            y = x * linear_space_elasticities[i]
+
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=f'{business_units[i]} (m={st.session_state.elasticities[i]})'))
+        
+            # Customize the layout
+            fig.update_layout(
+            title=f"{business_units[i]} Space Elasticity",
+            xaxis_title="Space Allocated",
+            yaxis_title="Elasticity (Sales Impact)",
+            template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
+            showlegend=True
+            )
+        
+            # Display the plot in Streamlit
+            st.plotly_chart(fig)
 
 # Restart if needed
 else:
