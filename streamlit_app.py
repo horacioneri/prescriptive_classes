@@ -18,9 +18,10 @@ def change_page(delta):
 current_page = st.session_state.page 
 if current_page == 0:
     st.title(page_title[current_page])
-    with st.expander('Use case'):
-        st.markdown('**Introduction to the problem**')
-        st.info('Lorem Ipsum...')
+    st.write(current_page)
+    #with st.expander('Use case'):
+    #    st.markdown('**Introduction to the problem**')
+    #    st.info('Lorem Ipsum...')
     
     left, right = st.columns(2)
     if right.button("Next", use_container_width=True):
