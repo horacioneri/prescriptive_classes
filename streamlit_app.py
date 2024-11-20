@@ -1,5 +1,5 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 import numpy as np
 
 # Initialize session state variables
@@ -54,17 +54,21 @@ elif 0 < current_page <= 5:
             x = range(0,500,1)
             y = x * linear_space_elasticities[i]
 
-            # Plot the function
-            fig, ax = plt.subplots(figsize=(6, 4))
-            ax.plot(x, y, label=f"{business_units[i]} (m={linear_space_elasticities[i]})")
-            ax.set_title(f"{business_units[i]} Space Elasticity")
-            ax.set_xlabel("Space Allocated")
-            ax.set_ylabel("Elasticity (Sales Impact)")
-            ax.grid(True)
-            ax.legend()
+            # Create a Plotly figure
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})'))
             
-            # Render the plot in Streamlit
-            st.pyplot(fig)
+            # Customize the layout
+            fig.update_layout(
+                title=f"{business_units[i]} Space Elasticity",
+                xaxis_title="Space Allocated",
+                yaxis_title="Elasticity (Sales Impact)",
+                template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
+                showlegend=True
+            )
+            
+            # Display the plot in Streamlit
+            st.plotly_chart(fig)
 
 # Restart if needed
 else:
