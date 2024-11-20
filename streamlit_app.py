@@ -51,7 +51,7 @@ elif 0 < current_page <= 5:
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
         with col[i]:
-            x = range(0,500,1)
+            x = np.arange(501)
             y = x * linear_space_elasticities[i]
 
             # Create a Plotly figure
