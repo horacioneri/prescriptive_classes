@@ -32,7 +32,7 @@ elif 0 < current_page <= 5:
     with st.sidebar:
         st.header('Your Answer')
         for i in range(0,5,1):
-            st.session_state.answers[i] = st.number_imput("Insert the space allocated to " + business_units[i])
+            st.session_state.answers[i] = st.number_input("Insert the space allocated to " + business_units[i])
             
     left, right = st.columns(2)
     if left.button("Previous", use_container_width=True):
