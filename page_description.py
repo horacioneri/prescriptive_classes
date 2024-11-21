@@ -7,6 +7,16 @@ def introduction(i):
         st.write('A retailer wants to reallocate the macro-space of a store in order to *maximize its sales*')
         st.write(f'The store has {available_space} m² available. The store sells products from {len(business_units)} different Business Units, each with *distinct number of items, margins, dimensions, and space elasticity functions*')
         st.write('Since the assortment is defined by a different team, it is required that every BU has enough space to display at *least one front of its SKUs*')
+
+        decision_variables = st.text_input("What are the decision variables of this problem?", height=100)
+        objetive_function = st.text_input("What is the objective function of this problem?", height=100)
+        constraints = st.text_input("What are the constraints of this problem?", height=100)
+
+        with st.expander('**Click to see answers**'):
+            st.markdown('Problem framing')
+            st.text_area(label="What are the decision variables of this problem?", value="The decision variables of this problem are the areas allocated to each business unit", height=100)
+            st.text_area(label="What is the objective function of this problem?", value="The objective function of this problem is to maximize sales", height=100)
+            st.text_area(label="What are the constraints of this problem?", value="The constraints of this problem are: \n- the maximum available space of the store;\n- the need to reserve enough space for each business unit to present at least one unit of each SKU in assortment", height=100)
     
     #Linear exercise with a single constraint
     if i == 1:

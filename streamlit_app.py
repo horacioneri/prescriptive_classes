@@ -226,6 +226,7 @@ elif current_page == len(page_title)-1:
 else:
     st.session_state.page = 0
 
-if st.button("Restart", use_container_width=True):
-    st.session_state.page = 0
-    st.rerun()
+if current_page > 0:
+    if st.button("Restart", use_container_width=True):
+        st.session_state.page = 0
+        st.rerun()
