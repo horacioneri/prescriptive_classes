@@ -103,7 +103,8 @@ if 0 < current_page <= len(page_title)-1:
                 yaxis_title="Sales Impact (€)",
                 yaxis=dict(range=[0, max_y_axis]),
                 template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
-                showlegend=True
+                showlegend=True,
+                legend = dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
             )
             
             # Display the plot in Streamlit
@@ -174,7 +175,8 @@ if 0 < current_page <= len(page_title)-1:
                     yaxis_title="Sales Impact (€)",
                     yaxis=dict(range=[0, max_y_axis]),
                     template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
-                    showlegend=True
+                    showlegend=True,
+                    legend = dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
                 )
                 
                 # Display the plot in Streamlit
