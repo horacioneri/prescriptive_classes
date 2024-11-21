@@ -60,8 +60,8 @@ elif 0 < current_page <= len(page_title)-1:
 
             # Highlight a specific datapoint
             fig.add_trace(go.Scatter(
-                x=answers[i],
-                y= value,
+                x=[answers[i]],
+                y= [value],
                 mode='markers',
                 marker=dict(size=10, color='red', symbol='circle'),
                 name='Your answer'
