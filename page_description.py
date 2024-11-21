@@ -26,8 +26,15 @@ def introduction(i):
         
         st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
 
+    #Linearization exercise
+    if i == 3:
+        st.write("The space elasticity function, typically does not follow a linear function, it follows a curve similiar to a logarithmic function")
+        st.write('Consider the following elasticity (daily sales / space allocated) for different brackets of area allocated [0-100], [100 - 300], [300-800]:')
+
+        st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
+
     #Non-linear exercise
-    if i >= 3:
+    if i >= 4:
         st.write("The space elasticity function, typically does not follow a linear function, it follows a curve similiar to a logarithmic function")
         st.write('Consider the following elasticity:')
         

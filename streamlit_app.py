@@ -2,7 +2,7 @@ import streamlit as st
 import pandas
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept
 from page_description import introduction
 
 # Initialize session state variables
@@ -62,6 +62,12 @@ if 0 < current_page <= len(page_title)-1:
             y_cont = [x * linear_space_elasticities[i] for x in x_cont]
             y_dash = [x * linear_space_elasticities[i] for x in x_dash]
             value = answers[i] * linear_space_elasticities[i]
+        elif current_page == 3:
+            for j in range(1, len(linearization_brackets)):
+                y_cont = [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_cont if linearization_brackets[j-1] < x <= linearization_brackets[j]]
+                y_dash = [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_dash if linearization_brackets[j-1] < x <= linearization_brackets[j]]
+                if linearization_brackets[j-1] <= answers[i] <= linearization_brackets[j]:
+                    value = answers[i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]  
         else:
             y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
             y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
@@ -125,6 +131,12 @@ if 0 < current_page <= len(page_title)-1:
                 y_cont = [x * linear_space_elasticities[i] for x in x_cont]
                 y_dash = [x * linear_space_elasticities[i] for x in x_dash]
                 value = optimized_answers[current_page][i] * linear_space_elasticities[i]
+            elif current_page == 3:
+                for j in range(1, len(linearization_brackets)):
+                    y_cont = [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_cont if linearization_brackets[j-1] < x <= linearization_brackets[j]]
+                    y_dash = [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_dash if linearization_brackets[j-1] < x <= linearization_brackets[j]]
+                    if linearization_brackets[j-1] <= optimized_answers[current_page][i] <= linearization_brackets[j]:
+                        value = optimized_answers[current_page][i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]
             else:
                 y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
                 y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
