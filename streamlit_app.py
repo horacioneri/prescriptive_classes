@@ -20,7 +20,7 @@ def change_page(delta):
 current_page = st.session_state.page
 
 # Display LTP logo
-st.image(caption = "Powered by", image= "images/Asset 6.png", width = 100, use_container_width = False)
+st.image(image= "images/Asset 6.png", caption = "Powered by", width = 100, use_container_width = False)
 
 # Display title of the page
 st.title(page_title[current_page])
