@@ -53,12 +53,12 @@ if 0 < current_page <= len(page_title)-1:
             x_dash = [x for x in np.arange(available_space + 1) if x < min_space[i]]
 
         if current_page <= 2:
-            y_cont = x_cont * linear_space_elasticities[i]
-            y_dash = x_dash * linear_space_elasticities[i]
+            y_cont = [x * linear_space_elasticities[i] for x in x_cont]
+            y_dash = [x * linear_space_elasticities[i] for x in x_dash]
             value = answers[i] * linear_space_elasticities[i]
         else:
-            y_cont = x_cont * linear_space_elasticities[i]
-            y_dash = x_dash * linear_space_elasticities[i]
+            y_cont = [x * linear_space_elasticities[i] for x in x_cont]
+            y_dash = [x * linear_space_elasticities[i] for x in x_dash]
             value = answers[i] * linear_space_elasticities[i]
 
         if i % 2 == 0:
