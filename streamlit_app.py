@@ -1,15 +1,13 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
+from config import page_title, business_units, linear_space_elasticities
+from page_description import introduction
 
 # Initialize session state variables
 if "page" not in st.session_state:
     st.session_state.page = 0
     st.session_state.answers = [0, 0, 0, 0, 0]
-
-page_title = ['Introduction', 'Basis of optimization', 'Constraints 1', 'Constraints 2', 'Objective function 1', 'Objective function 2']
-business_units = ['Beverages', 'Snacks', 'Hygiene', 'Fresh products', 'Other']
-linear_space_elasticities = [5, 1, 2, 4, 0.5]
 
 st.set_page_config(page_title='Understanding optimization', page_icon='')
 
@@ -37,11 +35,11 @@ if 0 < current_page <= len(page_title)-1:
 answers = st.session_state.answers
 
 # Display page body
-if current_page == 0:
-    
-    st.write('Intro to the exercise')
+# Display exercise instruction
+introduction(current_page)
 
-elif 0 < current_page <= len(page_title)-1:  
+# Display student answers
+if 0 < current_page <= len(page_title)-1:  
 
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
