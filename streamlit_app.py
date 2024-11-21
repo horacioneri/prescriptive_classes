@@ -2,7 +2,7 @@ import streamlit as st
 import pandas
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept, js
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept
 from page_description import introduction
 
 # Initialize session state variables
@@ -203,19 +203,19 @@ if 0 < current_page <= len(page_title)-1:
 # Display buttons at the end to navigate between pages
 if current_page == 0:
     left, right = st.columns(2)
-    if right.button("Next", use_container_width=True, key="next_0", on_click = js):
+    if right.button("Next", use_container_width=True, key="next_0"):
         change_page(1)
 
 elif 0 < current_page < len(page_title)-1:
     left, right = st.columns(2)
-    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}", on_click = js):
+    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
         change_page(-1)
-    if right.button("Next", use_container_width=True, key=f"next_{current_page}", on_click = js):
+    if right.button("Next", use_container_width=True, key=f"next_{current_page}"):
         change_page(1)
 
 elif current_page == len(page_title)-1:
     left, right = st.columns(2)
-    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}", on_click = js):
+    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
         change_page(-1)
 
 # Restart if needed
