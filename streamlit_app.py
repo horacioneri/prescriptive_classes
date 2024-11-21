@@ -40,12 +40,15 @@ if current_page == 0:
     
     st.write('Intro to the exercise')
 
-elif 0 < current_page <= len(page_title)-1:
-    st.title(page_title[current_page])    
+elif 0 < current_page <= len(page_title)-1:  
+
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
-        with col[i]:
+        if i % 2 = 0:
+            col = st.columns(2)
+        
+        with col[i % 2]:
             x = np.arange(501)
             y = x * linear_space_elasticities[i]
 
