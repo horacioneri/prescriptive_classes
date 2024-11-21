@@ -8,9 +8,9 @@ def introduction(i):
         st.write(f'The store has {available_space} m² available. The store sells products from {len(business_units)} different Business Units, each with *distinct number of items, margins, dimensions, and space elasticity functions*')
         st.write('Since the assortment is defined by a different team, it is required that every BU has enough space to display at *least one front of its SKUs*')
 
-        decision_variables = st.text_input("What are the decision variables of this problem?", height=100)
-        objetive_function = st.text_input("What is the objective function of this problem?", height=100)
-        constraints = st.text_input("What are the constraints of this problem?", height=100)
+        decision_variables = st.text_input("What are the decision variables of this problem?")
+        objetive_function = st.text_input("What is the objective function of this problem?")
+        constraints = st.text_input("What are the constraints of this problem?")
 
         with st.expander('**Click to see answers**'):
             st.markdown('Problem framing')

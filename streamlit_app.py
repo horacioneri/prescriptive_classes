@@ -9,7 +9,6 @@ from page_description import introduction
 if "page" not in st.session_state:
     st.session_state.page = 0
     st.session_state.answers = [0, 0, 0, 0, 0]
-    
 
 st.set_page_config(page_title='Understanding optimization', page_icon='')
 
