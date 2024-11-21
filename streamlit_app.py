@@ -46,6 +46,7 @@ if 0 < current_page <= len(page_title)-1:
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
+        #Create X axis of points to show in graphs, when there is a minimum, create a dashed line
         if current_page <= 1:
             x_cont = np.arange(available_space + 1)
             x_dash = [0]
@@ -53,6 +54,7 @@ if 0 < current_page <= len(page_title)-1:
             x_cont = [x for x in np.arange(available_space + 1) if x >= min_space[i]]
             x_dash = [x for x in np.arange(available_space + 1) if x < min_space[i]]
 
+        #Calculate the Y values depending on the elasticity function of the problem selected
         if current_page <= 2:
             y_cont = [x * linear_space_elasticities[i] for x in x_cont]
             y_dash = [x * linear_space_elasticities[i] for x in x_dash]
@@ -101,6 +103,10 @@ if 0 < current_page <= len(page_title)-1:
 
     sales_total = sales_total = sum([a * e for a, e in zip(answers, linear_space_elasticities)])
     st.text_area(label="Total expected sales:", value=sales_total, height=68)
+
+    st.header('Optimized solution', divider='rainbow')
+    with st.expander('Soluction visualization'):
+        st.markdown('**Click to see optimized solution**')
     
 # Display buttons at the end to navigate between pages
 if current_page == 0:
