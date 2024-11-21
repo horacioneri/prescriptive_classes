@@ -23,7 +23,7 @@ current_page = st.session_state.page
 st.image(image= "images/Asset 6.png", caption = "Powered by", width = 100, use_container_width = False)
 
 # Display title of the page
-st.title(page_title[current_page])
+st.title(page_title[current_page], anchor='title')
 
 # Display sidebar when needed
 if 0 < current_page <= len(page_title)-1:
