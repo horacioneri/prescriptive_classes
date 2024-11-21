@@ -116,10 +116,10 @@ if 0 < current_page <= len(page_title)-1:
     # Summarize the solution found
     st.header('Summary of solution', divider='rainbow')
     area_used = sum(answers)
-    st.text_area(label="Area used:", value=area_used, height=68)
+    st.text_area(label="Area used:", value=round(area_used,0), height=68)
 
     sales_total = sum(values)
-    st.text_area(label="Total expected sales:", value=sales_total, height=68)
+    st.text_area(label="Total expected sales:", value=round(sales_total,2), height=68)
 
     st.header('Optimized solution', divider='rainbow')
     with st.expander('**Click to see optimized solution**'):
@@ -188,13 +188,13 @@ if 0 < current_page <= len(page_title)-1:
 
         # Summarize the solution found
         opt_area_used = sum(optimized_answers[current_page])
-        val = str(opt_area_used)
+        val = str(round(opt_area_used,0))
         if area_used > available_space:
             val = val + '\nYour solution does not respect the available area of the store'
         st.text_area(label="Area used:", value=val, height=68)
 
         opt_sales_total = sum(optmized_values)
-        val = str(opt_sales_total)
+        val = str(round(opt_sales_total,2))
         val = val + f'\nYour answer was {100*round((opt_sales_total - sales_total)/opt_sales_total, 4)}% away from the optimal value'
         st.text_area(label="Total expected sales:", value=val, height=68)
 
