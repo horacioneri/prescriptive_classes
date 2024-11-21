@@ -181,10 +181,15 @@ if 0 < current_page <= len(page_title)-1:
 
         # Summarize the solution found
         opt_area_used = sum(optimized_answers[current_page])
-        st.text_area(label="Area used:", value=opt_area_used, height=68)
+        val = str(opt_area_used)
+        if opt_area_used > available_area:
+            val = val + '\nYour solution does not respect the available area of the store'
+        st.text_area(label="Area used:", value=val, height=68)
 
         opt_sales_total = sales_total = sum([a * e for a, e in zip(optimized_answers[current_page], linear_space_elasticities)])
-        st.text_area(label="Total expected sales:", value=opt_sales_total, height=68)
+        val = str(opt_sales_total)
+        val = val + f'\nYour answer was {100*round((opt_sales_total - sales_total)/opt_sales_total, 4)}% away from the optimal value'
+        st.text_area(label="Total expected sales:", value=val, height=68)
 
 
     
