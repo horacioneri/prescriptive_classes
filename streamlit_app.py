@@ -79,7 +79,7 @@ elif 0 < current_page < len(page_title)-1:
     if right.button("Next", use_container_width=True, key=f"next_{current_page}"):
         change_page(1)
 
-elif current_page = len(page_title)-1:
+elif current_page == len(page_title)-1:
     left, right = st.columns(2)
     if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
         change_page(-1)
