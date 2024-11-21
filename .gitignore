@@ -52,3 +52,6 @@ venv.bak/
 
 # Python virtualenv
 .ven
+
+# Excel
+*.xlsx
