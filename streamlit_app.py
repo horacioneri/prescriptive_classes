@@ -2,7 +2,7 @@ import streamlit as st
 import pandas
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis
 from page_description import introduction
 
 # Initialize session state variables
@@ -89,6 +89,7 @@ if 0 < current_page <= len(page_title)-1:
                 title=f"{business_units[i]} Space Elasticity",
                 xaxis_title="Space Allocated (m²)",
                 yaxis_title="Sales Impact (€)",
+                yaxis=dict(range=[0, max_y_axis]),
                 template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
                 showlegend=True
             )
@@ -151,6 +152,7 @@ if 0 < current_page <= len(page_title)-1:
                     title=f"{business_units[i]} Space Elasticity",
                     xaxis_title="Space Allocated (m²)",
                     yaxis_title="Sales Impact (€)",
+                    yaxis=dict(range=[0, max_y_axis]),
                     template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
                     showlegend=True
                 )
