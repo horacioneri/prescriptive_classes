@@ -11,14 +11,14 @@ page_title = ['Introduction', 'Basis of optimization', 'Constraints 1', 'Constra
 business_units = ['Beverages', 'Snacks', 'Hygiene', 'Fresh products', 'Other']
 linear_space_elasticities = [5, 1, 2, 4, 0.5]
 
-
 st.set_page_config(page_title='Understanding optimization', page_icon='')
-
 
 # Navigation function with forced rerun
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
     st.rerun()  # Force immediate rerun to reflect the updated page state
+
+current_page = st.session_state.page
 
 # Display title of the page
 st.title(page_title[current_page])
@@ -36,7 +36,6 @@ if 0 < current_page <= len(page_title)-1:
 
 
 # Display page body
-current_page = st.session_state.page
 if current_page == 0:
     
     st.write('Intro to the exercise')
