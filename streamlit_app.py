@@ -116,10 +116,10 @@ if 0 < current_page <= len(page_title)-1:
     # Summarize the solution found
     st.header('Summary of solution', divider='rainbow')
     area_used = sum(answers)
-    st.text_area(label="Area used:", value=round(area_used,0), height=68)
+    st.text_area(label="Area used:", value=str(round(area_used,0)), height=68)
 
     sales_total = sum(values)
-    st.text_area(label="Total expected sales:", value=round(sales_total,2), height=68)
+    st.text_area(label="Total expected sales:", value=str(round(sales_total,2)), height=68)
 
     st.header('Optimized solution', divider='rainbow')
     with st.expander('**Click to see optimized solution**'):
@@ -161,7 +161,7 @@ if 0 < current_page <= len(page_title)-1:
                 
                 fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]}', line=dict(dash='solid')))
                 
-                fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]}', line=dict(dash='dash')))
+                fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]}', line=dict(dash='dash'), showlegend=False))
 
                 # Highlight a specific datapoint
                 fig.add_trace(go.Scatter(
