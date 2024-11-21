@@ -72,7 +72,7 @@ if 0 < current_page <= len(page_title)-1:
                 if linearization_brackets[j-1] <= answers[i] <= linearization_brackets[j]:
                     values[i] = answers[i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] 
                 if answers[i] > linearization_brackets[j]:
-                    values[i] = answers[i] * bracket_space_elasticity[len(linearization_brackets)-1][i] + bracket_space_intercept[len(linearization_brackets)-1][i]
+                    values[i] = answers[i] * bracket_space_elasticity[len(linearization_brackets)-2][i] + bracket_space_intercept[len(linearization_brackets)-2][i]
         else:
             y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
             y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
