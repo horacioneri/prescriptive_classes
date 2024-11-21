@@ -134,9 +134,11 @@ if 0 < current_page <= len(page_title)-1:
                 y_dash = [x * linear_space_elasticities[i] for x in x_dash]
                 value = optimized_answers[current_page][i] * linear_space_elasticities[i]
             elif current_page == 3:
+                y_cont = []
+                y_dash = []
                 for j in range(1, len(linearization_brackets)):
-                    y_cont = [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_cont if linearization_brackets[j-1] < x <= linearization_brackets[j]]
-                    y_dash = [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_dash if linearization_brackets[j-1] < x <= linearization_brackets[j]]
+                    y_cont += [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_cont if linearization_brackets[j-1] < x <= linearization_brackets[j]]
+                    y_dash += [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_dash if linearization_brackets[j-1] < x <= linearization_brackets[j]]
                     if linearization_brackets[j-1] <= optimized_answers[current_page][i] <= linearization_brackets[j]:
                         value = optimized_answers[current_page][i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]
             else:
