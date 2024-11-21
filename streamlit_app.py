@@ -228,3 +228,4 @@ else:
 
 if st.button("Restart", use_container_width=True):
     st.session_state.page = 0
+    st.rerun()
