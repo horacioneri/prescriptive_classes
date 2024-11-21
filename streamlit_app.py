@@ -124,10 +124,10 @@ if 0 < current_page <= len(page_title)-1:
     # Summarize the solution found
     st.header('Summary of solution', divider='rainbow')
     area_used = sum(answers)
-    st.text_area(label="Area used:", value=str(round(area_used,0)), height=68)
+    st.text_area(label="Area used:", value=str(round(area_used,0)), height=68, key=f"area_{current_page}")
 
     sales_total = sum(values)
-    st.text_area(label="Total expected sales:", value=str(round(sales_total,2)), height=68)
+    st.text_area(label="Total expected sales:", value=str(round(sales_total,2)), height=68, key=f"sales_{current_page}")
 
     st.header('Optimized solution', divider='rainbow')
     with st.expander('**Click to see optimized solution**'):
@@ -203,12 +203,12 @@ if 0 < current_page <= len(page_title)-1:
             for i in range(len(business_units)):
                 if answers[i] < min_space[i]:
                     val = val + f'\nYour answer for {business_units[i]} does not respect the miminum area'
-        st.text_area(label="Area used:", value=val, height=68)
+        st.text_area(label="Area used:", value=val, height=68, key=f"opt_area_{current_page}")
 
         opt_sales_total = sum(optmized_values)
         val = str(round(opt_sales_total,2))
         val = val + f'\nYour answer was {100*round((opt_sales_total - sales_total)/opt_sales_total, 4)}% away from the optimal value'
-        st.text_area(label="Total expected sales:", value=val, height=68)
+        st.text_area(label="Total expected sales:", value=val, height=68, key=f"opt_sales_{current_page}")
 
 
 # Display buttons at the end to navigate between pages
