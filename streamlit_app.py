@@ -25,6 +25,7 @@ st.image(image= "images/Asset 6.png", caption = "Powered by", width = 100, use_c
 # Display title of the page
 st.title(page_title[current_page], anchor='title')
 
+
 # Display sidebar when needed
 if 0 < current_page <= len(page_title)-1:
     # Sidebar for accepting input parameters
@@ -38,10 +39,12 @@ if 0 < current_page <= len(page_title)-1:
 
 answers = st.session_state.answers
 
+
 # Display page body
 # Display exercise instruction
 st.header('Problem description', divider='rainbow')
 introduction(current_page)
+
 
 # Display student answers
 if 0 < current_page <= len(page_title)-1:  
@@ -192,7 +195,7 @@ if 0 < current_page <= len(page_title)-1:
         if area_used > available_space:
             val = val + '\nYour solution does not respect the available area of the store'
         for i in range(len(business_units)):
-            if answer[i] < min_space[i]:
+            if answers[i] < min_space[i]:
                 val = val + f'\nYour answer for {business_units[i]} does not respect the miminum area'
         st.text_area(label="Area used:", value=val, height=68)
 
@@ -200,6 +203,7 @@ if 0 < current_page <= len(page_title)-1:
         val = str(round(opt_sales_total,2))
         val = val + f'\nYour answer was {100*round((opt_sales_total - sales_total)/opt_sales_total, 4)}% away from the optimal value'
         st.text_area(label="Total expected sales:", value=val, height=68)
+
 
 # Display buttons at the end to navigate between pages
 if current_page == 0:
