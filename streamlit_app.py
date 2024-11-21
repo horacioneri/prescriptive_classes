@@ -2,7 +2,7 @@ import streamlit as st
 import pandas
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers
 from page_description import introduction
 
 # Initialize session state variables
@@ -107,6 +107,65 @@ if 0 < current_page <= len(page_title)-1:
     st.header('Optimized solution', divider='rainbow')
     with st.expander('**Click to see optimized solution**'):
         st.markdown('Soluction visualization')
+        for i in range(len(business_units)):
+            #Create X axis of points to show in graphs, when there is a minimum, create a dashed line
+        if current_page <= 1:
+            x_cont = np.arange(available_space + 1)
+            x_dash = [0]
+        else:
+            x_cont = [x for x in np.arange(available_space + 1) if x >= min_space[i]]
+            x_dash = [x for x in np.arange(available_space + 1) if x < min_space[i]]
+
+        #Calculate the Y values depending on the elasticity function of the problem selected
+        if current_page <= 2:
+            y_cont = [x * linear_space_elasticities[i] for x in x_cont]
+            y_dash = [x * linear_space_elasticities[i] for x in x_dash]
+            value = optimized_answers[current_page][i] * linear_space_elasticities[i]
+        else:
+            y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
+            y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
+            value = np.log(optimized_answers[current_page][i]+1) * log_space_elasticities[i]
+
+        if i % 2 == 0:
+            col = st.columns(2)
+        
+        with col[i % 2]:
+            # Create the elasticity trace
+            fig = go.Figure()
+            
+            fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='solid')))
+            
+            fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='dash')))
+
+            # Highlight a specific datapoint
+            fig.add_trace(go.Scatter(
+                x=[answers[i]],
+                y= [value],
+                mode='markers',
+                marker=dict(size=10, color='red', symbol='circle'),
+                name='Optimal answer'
+            ))
+            
+            # Customize the layout
+            fig.update_layout(
+                title=f"{business_units[i]} Space Elasticity",
+                xaxis_title="Space Allocated (m²)",
+                yaxis_title="Sales Impact (€)",
+                template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
+                showlegend=True
+            )
+            
+            # Display the plot in Streamlit
+            st.plotly_chart(fig)
+
+            # Summarize the solution found
+            opt_area_used = sum(optimized_answers[current_page])
+            st.text_area(label="Area used:", value=opt_area_used, height=68)
+
+            opt_sales_total = sales_total = sum([a * e for a, e in zip(optimized_answers[current_page], linear_space_elasticities)])
+            st.text_area(label="Total expected sales:", value=opt_sales_total, height=68)
+
+
     
 # Display buttons at the end to navigate between pages
 if current_page == 0:

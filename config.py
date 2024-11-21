@@ -16,3 +16,5 @@ df_bu = pd.DataFrame({
     'Minimum Space (m²)': min_space,
     'Log Space Elasticity (€/m²)': log_space_elasticities
 })
+
+optimized_answers = [[0,0,0,0,0],[800,0,0,0,0],[400,100,100,100,100],[300,133,133,133,101]]
