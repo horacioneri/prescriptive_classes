@@ -37,6 +37,7 @@ answers = st.session_state.answers
 
 # Display page body
 # Display exercise instruction
+st.header('Problem description', divider='rainbow')
 introduction(current_page)
 
 # Display student answers
@@ -94,6 +95,7 @@ if 0 < current_page <= len(page_title)-1:
             st.plotly_chart(fig)
 
     # Summarize the solution found
+    st.header('Summary of solution', divider='rainbow')
     area_used = sum(answers)
     st.text_area(label="Area used:", value=area_used, height=68)
 
