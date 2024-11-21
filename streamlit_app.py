@@ -190,6 +190,8 @@ if 0 < current_page <= len(page_title)-1:
         val = str(opt_sales_total)
         val = val + f'\nYour answer was {100*round((opt_sales_total - sales_total)/opt_sales_total, 4)}% away from the optimal value'
         st.text_area(label="Total expected sales:", value=val, height=68)
+        st.write(opt_sales_total)
+        st.write(sales_total)
 
 
     
