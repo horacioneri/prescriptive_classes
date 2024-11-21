@@ -185,7 +185,7 @@ if 0 < current_page <= len(page_title)-1:
         # Summarize the solution found
         opt_area_used = sum(optimized_answers[current_page])
         val = str(opt_area_used)
-        if opt_area_used > available_space:
+        if area_used > available_space:
             val = val + '\nYour solution does not respect the available area of the store'
         st.text_area(label="Area used:", value=val, height=68)
 
