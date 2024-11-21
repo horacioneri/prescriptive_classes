@@ -48,6 +48,7 @@ if 0 < current_page <= len(page_title)-1:
 
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
+    values = [0] * len(business_units)
     for i in range(len(business_units)):
         #Create X axis of points to show in graphs, when there is a minimum, create a dashed line
         if current_page <= 1:
@@ -61,7 +62,7 @@ if 0 < current_page <= len(page_title)-1:
         if current_page <= 2:
             y_cont = [x * linear_space_elasticities[i] for x in x_cont]
             y_dash = [x * linear_space_elasticities[i] for x in x_dash]
-            value = answers[i] * linear_space_elasticities[i]
+            values[i] = answers[i] * linear_space_elasticities[i]
         elif current_page == 3:
             y_cont = []
             y_dash = []
@@ -69,11 +70,11 @@ if 0 < current_page <= len(page_title)-1:
                 y_cont += [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_cont if linearization_brackets[j-1] < x <= linearization_brackets[j]]
                 y_dash += [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_dash if linearization_brackets[j-1] < x <= linearization_brackets[j]]
                 if linearization_brackets[j-1] <= answers[i] <= linearization_brackets[j]:
-                    value = answers[i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]  
+                    values[i] = answers[i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]  
         else:
             y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
             y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
-            value = np.log(answers[i]+1) * log_space_elasticities[i]
+            values[i] = np.log(answers[i]+1) * log_space_elasticities[i]
 
         if i % 2 == 0:
             col = st.columns(2)
@@ -90,7 +91,7 @@ if 0 < current_page <= len(page_title)-1:
             if answers[i] <= available_space:
                 fig.add_trace(go.Scatter(
                     x=[answers[i]],
-                    y= [value],
+                    y= [values[i]],
                     mode='markers',
                     marker=dict(size=10, color='red', symbol='circle'),
                     name='Your answer'
@@ -115,12 +116,13 @@ if 0 < current_page <= len(page_title)-1:
     area_used = sum(answers)
     st.text_area(label="Area used:", value=area_used, height=68)
 
-    sales_total = sales_total = sum([a * e for a, e in zip(answers, linear_space_elasticities)])
+    sales_total = sum(values)
     st.text_area(label="Total expected sales:", value=sales_total, height=68)
 
     st.header('Optimized solution', divider='rainbow')
     with st.expander('**Click to see optimized solution**'):
         st.markdown('Soluction visualization')
+        optmized_values = [0] * len(business_units)
         for i in range(len(business_units)):
             #Create X axis of points to show in graphs, when there is a minimum, create a dashed line
             if current_page <= 1:
@@ -134,7 +136,7 @@ if 0 < current_page <= len(page_title)-1:
             if current_page <= 2:
                 y_cont = [x * linear_space_elasticities[i] for x in x_cont]
                 y_dash = [x * linear_space_elasticities[i] for x in x_dash]
-                value = optimized_answers[current_page][i] * linear_space_elasticities[i]
+                optmized_values[i] = optimized_answers[current_page][i] * linear_space_elasticities[i]
             elif current_page == 3:
                 y_cont = []
                 y_dash = []
@@ -142,11 +144,11 @@ if 0 < current_page <= len(page_title)-1:
                     y_cont += [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_cont if linearization_brackets[j-1] < x <= linearization_brackets[j]]
                     y_dash += [x * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i] for x in x_dash if linearization_brackets[j-1] < x <= linearization_brackets[j]]
                     if linearization_brackets[j-1] <= optimized_answers[current_page][i] <= linearization_brackets[j]:
-                        value = optimized_answers[current_page][i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]
+                        optmized_values[i] = optimized_answers[current_page][i] * bracket_space_elasticity[j-1][i] + bracket_space_intercept[j-1][i]
             else:
                 y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
                 y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
-                value = np.log(optimized_answers[current_page][i]+1) * log_space_elasticities[i]
+                optmized_values[i] = np.log(optimized_answers[current_page][i]+1) * log_space_elasticities[i]
 
             if i % 2 == 0:
                 col = st.columns(2)
@@ -162,7 +164,7 @@ if 0 < current_page <= len(page_title)-1:
                 # Highlight a specific datapoint
                 fig.add_trace(go.Scatter(
                     x=[optimized_answers[current_page][i]],
-                    y= [value],
+                    y= [optmized_values[i]],
                     mode='markers',
                     marker=dict(size=10, color='red', symbol='circle'),
                     name='Optimal answer'
@@ -189,7 +191,7 @@ if 0 < current_page <= len(page_title)-1:
             val = val + '\nYour solution does not respect the available area of the store'
         st.text_area(label="Area used:", value=val, height=68)
 
-        opt_sales_total = sum([x * e for x, e in zip(optimized_answers[current_page], linear_space_elasticities)])
+        opt_sales_total = sum(optmized_values)
         val = str(opt_sales_total)
         val = val + f'\nYour answer was {100*round((opt_sales_total - sales_total)/opt_sales_total, 4)}% away from the optimal value'
         st.text_area(label="Total expected sales:", value=val, height=68)

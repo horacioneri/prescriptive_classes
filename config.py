@@ -9,7 +9,7 @@ business_units = ['Beverages', 'Snacks', 'Hygiene', 'Fresh products', 'Other']
 linear_space_elasticities = [5, 1, 2, 4, 0.5]
 min_space = [100, 100, 100, 100, 100]
 
-linearization_brackets = [0, 100, 300, available_space]
+linearization_brackets = [0, 100, 300, 800]
 
 log_space_elasticities = [round((300 * x) / np.log(301),2) for x in linear_space_elasticities] 
 
