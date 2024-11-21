@@ -105,8 +105,8 @@ if 0 < current_page <= len(page_title)-1:
     st.text_area(label="Total expected sales:", value=sales_total, height=68)
 
     st.header('Optimized solution', divider='rainbow')
-    with st.expander('Soluction visualization'):
-        st.markdown('**Click to see optimized solution**')
+    with st.expander('**Click to see optimized solution**'):
+        st.markdown('Soluction visualization')
     
 # Display buttons at the end to navigate between pages
 if current_page == 0:
