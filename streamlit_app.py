@@ -2,7 +2,7 @@ import streamlit as st
 import pandas
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities, min_space
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities
 from page_description import introduction
 
 # Initialize session state variables
@@ -57,9 +57,9 @@ if 0 < current_page <= len(page_title)-1:
             y_dash = [x * linear_space_elasticities[i] for x in x_dash]
             value = answers[i] * linear_space_elasticities[i]
         else:
-            y_cont = [x * linear_space_elasticities[i] for x in x_cont]
-            y_dash = [x * linear_space_elasticities[i] for x in x_dash]
-            value = answers[i] * linear_space_elasticities[i]
+            y_cont = [np.log(x+1) * log_space_elasticities[i] for x in x_cont]
+            y_dash = [np.log(x+1) * log_space_elasticities[i] for x in x_dash]
+            value = np.log(answers[i]+1) * log_space_elasticities[i]
 
         if i % 2 == 0:
             col = st.columns(2)
