@@ -46,16 +46,26 @@ elif 0 < current_page <= len(page_title)-1:
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
+        x = np.arange(501)
+        y = x * linear_space_elasticities[i]
+        value = answers[i] * linear_space_elasticities[i]
+
         if i % 2 == 0:
             col = st.columns(2)
         
         with col[i % 2]:
-            x = np.arange(501)
-            y = x * linear_space_elasticities[i]
-
-            # Create a Plotly figure
+            # Create the elasticity trace
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})'))
+
+            # Highlight a specific datapoint
+            fig.add_trace(go.Scatter(
+                x=answers[i],
+                y= value,
+                mode='markers',
+                marker=dict(size=10, color='red', symbol='circle'),
+                name='Your answer'
+            ))
             
             # Customize the layout
             fig.update_layout(
