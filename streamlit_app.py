@@ -2,7 +2,7 @@ import streamlit as st
 import pandas
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space
 from page_description import introduction
 
 # Initialize session state variables
@@ -45,9 +45,21 @@ if 0 < current_page <= len(page_title)-1:
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
-        x = np.arange(available_space + 1)
-        y = x * linear_space_elasticities[i]
-        value = answers[i] * linear_space_elasticities[i]
+        if current_page <= 1:
+            x_cont = np.arange(available_space + 1)
+            x_dash = [0]
+        else:
+            x_cont = [x for x in np.arange(available_space + 1) if x >= min_space[i]]
+            x_dash = [x for x in np.arange(available_space + 1) if x < min_space[i]]
+
+        if current_page <= 2:
+            y_cont = x_cont * linear_space_elasticities[i]
+            y_dash = x_dash * linear_space_elasticities[i]
+            value = answers[i] * linear_space_elasticities[i]
+        else:
+            y_cont = x_cont * linear_space_elasticities[i]
+            y_dash = x_dash * linear_space_elasticities[i]
+            value = answers[i] * linear_space_elasticities[i]
 
         if i % 2 == 0:
             col = st.columns(2)
@@ -55,7 +67,9 @@ if 0 < current_page <= len(page_title)-1:
         with col[i % 2]:
             # Create the elasticity trace
             fig = go.Figure()
-            fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})'))
+            fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='dash')))
+
+            fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='solid')))
 
             # Highlight a specific datapoint
             fig.add_trace(go.Scatter(
