@@ -49,7 +49,7 @@ introduction(current_page)
 # Display student answers
 if 0 < current_page <= len(page_title)-1:  
 
-    st.header('Elasticity curves', divider='rainbow')
+    st.header('Solution analysis', divider='rainbow')
     col = st.columns(len(business_units))
     values = [0] * len(business_units)
     for i in range(len(business_units)):
