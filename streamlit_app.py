@@ -23,7 +23,7 @@ current_page = st.session_state.page
 st.image(image= "images/Asset 6.png", caption = "Powered by", width = 100, use_container_width = False)
 
 if current_page > 0:
-    if st.button("Restart", use_container_width=True):
+    if st.button("Restart", use_container_width=True, key=f"top_restart_{current_page}"):
         st.session_state.page = 0
         st.rerun()
 
@@ -232,6 +232,6 @@ else:
     st.session_state.page = 0
 
 if current_page > 0:
-    if st.button("Restart", use_container_width=True):
+    if st.button("Restart", use_container_width=True, key=f"bot_restart_{current_page}"):
         st.session_state.page = 0
         st.rerun()
