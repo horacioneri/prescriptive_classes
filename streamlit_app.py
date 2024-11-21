@@ -82,9 +82,9 @@ if 0 < current_page <= len(page_title)-1:
             # Create the elasticity trace
             fig = go.Figure()
             
-            fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='solid')))
+            fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]}', line=dict(dash='solid')))
             
-            fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='dash')))
+            fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]}', line=dict(dash='dash')))
 
             # Highlight a specific datapoint
             if answers[i] <= available_space:
@@ -155,9 +155,9 @@ if 0 < current_page <= len(page_title)-1:
                 # Create the elasticity trace
                 fig = go.Figure()
                 
-                fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='solid')))
+                fig.add_trace(go.Scatter(x=x_cont, y=y_cont, mode='lines', name=f'{business_units[i]}', line=dict(dash='solid')))
                 
-                fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]} (m={linear_space_elasticities[i]})', line=dict(dash='dash')))
+                fig.add_trace(go.Scatter(x=x_dash, y=y_dash, mode='lines', name=f'{business_units[i]}', line=dict(dash='dash')))
 
                 # Highlight a specific datapoint
                 fig.add_trace(go.Scatter(
