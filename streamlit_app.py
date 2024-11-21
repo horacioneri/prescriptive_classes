@@ -14,24 +14,17 @@ linear_space_elasticities = [5, 1, 2, 4, 0.5]
 
 st.set_page_config(page_title='Understanding optimization', page_icon='')
 
+
 # Navigation function with forced rerun
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
     st.rerun()  # Force immediate rerun to reflect the updated page state
 
-# Display current page content
-current_page = st.session_state.page
-if current_page == 0:
-    st.title(page_title[current_page])
-    st.write('Intro to the exercise')
+# Display title of the page
+st.title(page_title[current_page])
 
-    left, right = st.columns(2)
-    if right.button("Next", use_container_width=True, key="next_0"):
-        change_page(1)
-
-elif 0 < current_page <= 5:
-    st.title(page_title[current_page])
-
+# Display sidebar when needed
+if 0 < current_page <= len(page_title)-1:
     # Sidebar for accepting input parameters
     with st.sidebar:
         st.header('Your Answer')
@@ -41,12 +34,15 @@ elif 0 < current_page <= 5:
                 key=f"answer_{i}"
             )
 
-    left, right = st.columns(2)
-    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
-        change_page(-1)
-    if right.button("Next", use_container_width=True, key=f"next_{current_page}"):
-        change_page(1)
 
+# Display page body
+current_page = st.session_state.page
+if current_page == 0:
+    
+    st.write('Intro to the exercise')
+
+elif 0 < current_page <= len(page_title)-1:
+    st.title(page_title[current_page])    
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
@@ -69,6 +65,24 @@ elif 0 < current_page <= 5:
             
             # Display the plot in Streamlit
             st.plotly_chart(fig)
+
+# Display buttons at the end to navigate between pages
+if current_page == 0:
+    left, right = st.columns(2)
+    if right.button("Next", use_container_width=True, key="next_0"):
+        change_page(1)
+
+elif 0 < current_page < len(page_title)-1:
+    left, right = st.columns(2)
+    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
+        change_page(-1)
+    if right.button("Next", use_container_width=True, key=f"next_{current_page}"):
+        change_page(1)
+
+elif current_page = len(page_title)-1:
+    left, right = st.columns(2)
+    if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
+        change_page(-1)
 
 # Restart if needed
 else:
