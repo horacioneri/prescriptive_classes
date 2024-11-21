@@ -1,5 +1,5 @@
 import streamlit as st
-import config
+from config import page_title, business_units, available_space, linear_space_elasticities
 
 def introduction(i):
     #Overall introduction
