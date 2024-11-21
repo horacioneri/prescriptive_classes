@@ -222,7 +222,9 @@ elif current_page == len(page_title)-1:
     left, right = st.columns(2)
     if left.button("Previous", use_container_width=True, key=f"prev_{current_page}"):
         change_page(-1)
-
 # Restart if needed
 else:
+    st.session_state.page = 0
+
+if st.button("Restart", use_container_width=True):
     st.session_state.page = 0
