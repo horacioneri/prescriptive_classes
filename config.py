@@ -25,7 +25,10 @@ df_bu = pd.DataFrame({
     'Business Unit': business_units,
     'Linear Space Elasticity (€/m²)': linear_space_elasticities,
     'Minimum Space (m²)': min_space,
-    'Log Space Elasticity (€/m²)': log_space_elasticities
+    'Log Space Elasticity (€/m²)': log_space_elasticities,
+    'Linear Space Elasticity (€/m²) - Area in [0,100]': bracket_space_elasticity[0],
+    'Linear Space Elasticity (€/m²) - Area in [100,300]': bracket_space_elasticity[1],
+    'Linear Space Elasticity (€/m²) - Area in [300,800]': bracket_space_elasticity[2],
 })
 
 optimized_answers = [[0,0,0,0,0],[800,0,0,0,0],[400,100,100,100,100],[300,133,133,133,101],[300,133,133,133,101]]
