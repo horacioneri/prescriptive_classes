@@ -30,7 +30,7 @@ if 0 < current_page <= len(page_title)-1:
         st.header('Your Answer')
         for i in range(len(business_units)):
             st.session_state.answers[i] = st.number_input(
-                f"Insert the space allocated to {business_units[i]}",
+                f"Insert the space allocated to {business_units[i]} (m²)",
                 key=f"answer_{i}"
             )
 
@@ -59,8 +59,8 @@ elif 0 < current_page <= len(page_title)-1:
             # Customize the layout
             fig.update_layout(
                 title=f"{business_units[i]} Space Elasticity",
-                xaxis_title="Space Allocated",
-                yaxis_title="Elasticity (Sales Impact)",
+                xaxis_title="Space Allocated (m²)",
+                yaxis_title="Sales Impact (€)",
                 template="ggplot2",  # Choose a template (e.g., "plotly_dark", "ggplot2", etc.)
                 showlegend=True
             )
