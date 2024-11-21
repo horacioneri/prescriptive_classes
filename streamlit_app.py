@@ -34,6 +34,7 @@ if 0 < current_page <= len(page_title)-1:
                 key=f"answer_{i}"
             )
 
+answers = st.session_state.answers
 
 # Display page body
 if current_page == 0:
@@ -68,6 +69,13 @@ elif 0 < current_page <= len(page_title)-1:
             # Display the plot in Streamlit
             st.plotly_chart(fig)
 
+    # Summarize the solution found
+    area_used = sum(answers)
+    st.text_area(label="Area used:", value=area_used, height=100)
+
+    sales_total = sales_total = sum([a * e for a, e in zip(answers, linear_space_elasticities)])
+    st.text_area(label="Total expected sales:", value=sales_total, height=100)
+    
 # Display buttons at the end to navigate between pages
 if current_page == 0:
     left, right = st.columns(2)
