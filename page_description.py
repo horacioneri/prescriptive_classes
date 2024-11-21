@@ -1,5 +1,5 @@
 import streamlit as st
-from config import page_title, business_units, available_space, linear_space_elasticities, df_bu
+from config import page_title, business_units, available_space, linear_space_elasticities, df_bu, a
 
 def introduction(i):
     #Overall introduction
@@ -16,3 +16,5 @@ def introduction(i):
         st.dataframe(df_bu[['Business Unit', 'Linear Space Elasticity (€/m²)']])
         
         st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
+
+    
