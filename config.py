@@ -34,3 +34,8 @@ df_bu = pd.DataFrame({
 optimized_answers = [[0,0,0,0,0],[800,0,0,0,0],[400,100,100,100,100],[300,133,133,133,101],[300,133,133,133,101]]
 max_y_axis = max(linear_space_elasticities)*available_space + 1
 
+js = ''' <a target="_self" href="#section-1">
+            <button>
+                Back to Top
+            </button>
+        </a>'''
