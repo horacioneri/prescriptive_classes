@@ -45,7 +45,7 @@ elif 0 < current_page <= len(page_title)-1:
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
-        if i % 2 = 0:
+        if i % 2 == 0:
             col = st.columns(2)
         
         with col[i % 2]:
