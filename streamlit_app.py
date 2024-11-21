@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas
 import plotly.graph_objects as go
 import numpy as np
 from config import page_title, business_units, available_space, linear_space_elasticities
@@ -44,7 +45,7 @@ if 0 < current_page <= len(page_title)-1:
     st.header('Elasticity curves', divider='rainbow')
     col = st.columns(len(business_units))
     for i in range(len(business_units)):
-        x = np.arange(501)
+        x = np.arange(available_space + 1)
         y = x * linear_space_elasticities[i]
         value = answers[i] * linear_space_elasticities[i]
 

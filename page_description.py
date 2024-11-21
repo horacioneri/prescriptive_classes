@@ -1,5 +1,5 @@
 import streamlit as st
-from config import page_title, business_units, available_space, linear_space_elasticities, df_bu
+from config import page_title, business_units, available_space, df_bu
 
 def introduction(i):
     #Overall introduction
@@ -17,4 +17,12 @@ def introduction(i):
         
         st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
 
+    #Linear exercise with an additional constraint
+    if i == 2:
+        st.write("Now, consider the minimum space required for each BU to present one example of each SKU in the assortment")
+        st.write('Consider the following minimum spaces:')
+        
+        st.dataframe(df_bu[['Business Unit', 'Linear Space Elasticity (€/m²)', 'Minimum Space (m²)']])
+        
+        st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
     
