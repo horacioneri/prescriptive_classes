@@ -32,7 +32,7 @@ df_bu = pd.DataFrame({
     'Linear Space Intercept - Area in [300,800]': bracket_space_intercept[2],
 })
 
-optimized_answers = [[0,0,0,0,0],[800,0,0,0,0],[520,70,70,70,70],[300,100,100,200,100],[300.37,70.0,119.54,240.09,70.0]]
+optimized_answers = [[0,0,0,0,0],[800,0,0,0,0],[520,70,70,70,70],[520,70,70,70,70],[300,100,100,200,100],[300.37,70.0,119.54,240.09,70.0]]
 max_y_axis = max(linear_space_elasticities)*available_space + 1
 
 #df_bu.to_excel('dataframe.xlsx')
