@@ -13,6 +13,9 @@ if "page" not in st.session_state:
 if "answers" not in st.session_state:
     st.session_state.answers = [0] * len(business_units)  # Initialize with zeros for all business units
 
+# Use session state for answers
+answers = st.session_state.answers
+
 st.set_page_config(page_title='Understanding optimization', page_icon='')
 
 # Navigation function with forced rerun
@@ -42,11 +45,9 @@ if 0 < current_page <= len(page_title)-1:
         for i in range(len(business_units)):
             st.session_state.answers[i] = st.number_input(
                 f"Insert the space allocated to {business_units[i]} (m²)",
+                value = answers[i],
                 key=f"answer_{i}"
             )
-
-# Use session state for answers
-answers = st.session_state.answers
 
 
 # Display page body
