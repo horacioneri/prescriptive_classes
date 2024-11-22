@@ -3,7 +3,7 @@ import pandas
 from streamlit_plotly_events import plotly_events
 import plotly.graph_objects as go
 import numpy as np
-from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept
+from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept, max_ratio_areas
 from page_description import introduction, min_index, max_index
 
 # Initialize session state variables
