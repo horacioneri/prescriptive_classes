@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas
 from streamlit_plotly_events import plotly_events
 import plotly.graph_objects as go
@@ -34,7 +35,7 @@ def scroll_to(element_id):
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
     st.session_state.expander_open = False  # Collapse the expander when going to the next page
-    scroll_to('title')
+    #scroll_to('title')
     st.rerun()  # Force immediate rerun to reflect the updated page state
 
 current_page = st.session_state.page
