@@ -4,7 +4,7 @@ from streamlit_plotly_events import plotly_events
 import plotly.graph_objects as go
 import numpy as np
 from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept
-from page_description import introduction
+from page_description import introduction, min_index, max_index
 
 # Initialize session state variables
 if "page" not in st.session_state:
@@ -72,11 +72,11 @@ if 0 < current_page <= len(page_title)-1:
             x_dash = [x for x in np.arange(available_space + 1) if x < min_space[i]]
 
         #Calculate the Y values depending on the elasticity function of the problem selected
-        if current_page <= 2:
+        if current_page <= 3:
             y_cont = [x * linear_space_elasticities[i] for x in x_cont]
             y_dash = [x * linear_space_elasticities[i] for x in x_dash]
             values[i] = answers[i] * linear_space_elasticities[i]
-        elif current_page == 3:
+        elif current_page == 4:
             y_cont = []
             y_dash = []
             for j in range(1, len(linearization_brackets)):
@@ -169,11 +169,11 @@ if 0 < current_page <= len(page_title)-1:
                 x_dash = [x for x in np.arange(available_space + 1) if x < min_space[i]]
 
             #Calculate the Y values depending on the elasticity function of the problem selected
-            if current_page <= 2:
+            if current_page <= 3:
                 y_cont = [x * linear_space_elasticities[i] for x in x_cont]
                 y_dash = [x * linear_space_elasticities[i] for x in x_dash]
                 optmized_values[i] = optimized_answers[current_page][i] * linear_space_elasticities[i]
-            elif current_page == 3:
+            elif current_page == 4:
                 y_cont = []
                 y_dash = []
                 for j in range(1, len(linearization_brackets)):
@@ -229,6 +229,9 @@ if 0 < current_page <= len(page_title)-1:
             for i in range(len(business_units)):
                 if answers[i] < min_space[i]:
                     val = val + f'\nYour answer for {business_units[i]} does not respect the miminum area'
+        if current_page >= 3:
+            if answers[max_index] >= answers[min_index]*max_ratio_areas:
+                val = val + f'\nThe area of {business_units[max_index]} is more than {max_ratio_areas} times larger than the area of {business_units[min_index]}'
         st.text_area(label="Area used:", value=val, height=68, key=f"opt_area_{current_page}")
 
         opt_sales_total = sum(optmized_values)

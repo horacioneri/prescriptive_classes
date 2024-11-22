@@ -1,5 +1,13 @@
 import streamlit as st
-from config import page_title, business_units, available_space, df_bu
+from config import page_title, business_units, available_space, df_bu, max_ratio_areas
+
+# Find the index of the maximum and minimum value in the 'Linear Space Elasticity (€/m²)' column
+max_index = df_bu['Linear Space Elasticity (€/m²)'].idxmax()
+min_index = df_bu['Linear Space Elasticity (€/m²)'].idxmin()
+
+# Retrieve the business unit with the highest linear space elasticity
+highest_linear_elasticity_bu = df_bu.loc[max_index, 'Business Unit']
+lowest_linear_elasticity_bu = df_bu.loc[min_index, 'Business Unit']
 
 def introduction(i):
     #Overall introduction
@@ -37,9 +45,16 @@ def introduction(i):
         st.dataframe(df_bu[['Business Unit', 'Linear Space Elasticity (€/m²)', 'Minimum Space (m²)']])
         
         st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
+    
+    #Additional constraint
+    if i == 3:
+        st.write(f"Due to a new public policy, it is required by law that the '{highest_linear_elasticity_bu}' unit can't be larger that {max_ratio_areas} times the '{lowest_linear_elasticity_bu}' unit" )
+        st.write('Consider the same elasticities and minimum spaces as in the previous exercise:')
+        st.dataframe(df_bu[['Business Unit', 'Linear Space Elasticity (€/m²)', 'Minimum Space (m²)']])
+        st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
 
     #Linearization exercise
-    if i == 3:
+    if i == 4:
         st.write("The space elasticity function, typically does not follow a linear function, it follows a curve similiar to a logarithmic function")
         st.write('Consider the following elasticity (daily sales / space allocated) for different brackets of area allocated [0-100], [100 - 300], [300-800]:')
 
@@ -52,7 +67,7 @@ def introduction(i):
         st.write('Submit the space you want to allocate to each BU in the left sidebar and analyze your answers below')
 
     #Non-linear exercise
-    if i >= 4:
+    if i >= 5:
         st.write("Now, consider it follows a logarithmic curve instead of linear functions")
         st.write('Consider the following elasticity:')
         

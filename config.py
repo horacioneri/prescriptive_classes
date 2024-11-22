@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 
 available_space = 800
-page_title = ['Introduction', 'Basics of optimization', 'Constraints', 'Objective function', 'Non-linear problem']
+max_ratio_areas = 2.5
+page_title = ['Introduction', 'Basics of optimization', 'Constraints 1', 'Constraints 2', 'Objective function', 'Non-linear problem']
 business_units = ['Beverages', 'Snacks', 'Hygiene', 'Fresh products', 'Other']
 linear_space_elasticities = [5, 1, 2, 4, 0.5]
 min_space = [70, 70, 70, 70, 70]
-
 linearization_brackets = [0, 100, 300, 800]
 
 log_space_elasticities = [round((300 * x) / np.log(301),2) for x in linear_space_elasticities] 
