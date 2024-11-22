@@ -13,6 +13,9 @@ if "page" not in st.session_state:
 if "answers" not in st.session_state:
     st.session_state.answers = [0] * len(business_units)  # Initialize with zeros for all business units
 
+if "expander_open" not in st.session_state:
+    st.session_state.expander_open = False  # Track expander state
+
 # Use session state for answers
 answers = st.session_state.answers
 
@@ -21,6 +24,7 @@ st.set_page_config(page_title='Understanding optimization', page_icon='', layout
 # Navigation function with forced rerun
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
+    st.session_state.expander_open = False  # Collapse the expander when going to the next page
     st.rerun()  # Force immediate rerun to reflect the updated page state
 
 current_page = st.session_state.page
@@ -156,7 +160,7 @@ if 0 < current_page <= len(page_title)-1:
     st.text_area(label="Total expected sales:", value=str(round(sales_total,2)), height=68, key=f"sales_{current_page}")
 
     st.header('Optimized solution', divider='rainbow')
-    with st.expander('**Click to see optimized solution**'):
+    with st.expander('**Click to see optimized solution**', expanded=st.session_state.expander_open):
         st.markdown('Soluction visualization')
         optmized_values = [0] * len(business_units)
         for i in range(len(business_units)):
@@ -264,4 +268,5 @@ else:
 if current_page > 0:
     if st.button("Restart", use_container_width=True, key=f"bot_restart_{current_page}"):
         st.session_state.page = 0
+        st.session_state.expander_open = False  # Collapse the expander when going to the next page
         st.rerun()
