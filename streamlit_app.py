@@ -16,7 +16,7 @@ if "answers" not in st.session_state:
 # Use session state for answers
 answers = st.session_state.answers
 
-st.set_page_config(page_title='Understanding optimization', page_icon='')
+st.set_page_config(page_title='Understanding optimization', page_icon='', layout = 'wide')
 
 # Navigation function with forced rerun
 def change_page(delta):
