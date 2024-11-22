@@ -22,20 +22,20 @@ answers = st.session_state.answers
 st.set_page_config(page_title='Understanding optimization', page_icon='', layout = 'wide')
 
 #Go to top
-js = '''
+def scroll_to(element_id):
+    components.html(f'''
         <script>
-            var body = window.parent.document.querySelector(".main");
-            console.log(body);
-            body.scrollTop = 0;
+            var element = window.parent.document.getElementById("{element_id}");
+            element.scrollIntoView({{behavior: 'smooth'}});
         </script>
-        '''
+    '''.encode())
 
 # Navigation function with forced rerun
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
     st.session_state.expander_open = False  # Collapse the expander when going to the next page
     st.rerun()  # Force immediate rerun to reflect the updated page state
-    st.components.v1.html(js)
+    scroll_to('title')
 
 current_page = st.session_state.page
 
@@ -280,4 +280,4 @@ if current_page > 0:
         st.session_state.page = 0
         st.session_state.expander_open = False  # Collapse the expander when going to the next page
         st.rerun()
-        st.components.v1.html(js)
+        scroll_to('title')
