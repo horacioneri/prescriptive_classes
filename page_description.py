@@ -15,7 +15,7 @@ def introduction(i):
         st.write('A retailer wants to reallocate the macro-space of a store in order to *maximize its sales*')
         st.write(f'The store has {available_space} m² available. The store sells products from {len(business_units)} different Business Units, each with *distinct number of items, margins, dimensions, and space elasticity functions*')
         st.write('Since the assortment is defined by a different team, it is required that every BU has enough space to display at *least one front of its SKUs*')
-        st.image(image= "images/layout_example.jpg", use_container_width = True)
+        st.image(image= "images/layout_example.jpg", width = 300, use_container_width = False)
 
         st.header('Problem framing', divider='rainbow')
         decision_variables = st.text_input("What are the decision variables of this problem?")
