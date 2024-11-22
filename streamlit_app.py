@@ -34,8 +34,8 @@ def scroll_to(element_id):
 def change_page(delta):
     st.session_state.page = max(0, min(len(page_title) - 1, st.session_state.page + delta))
     st.session_state.expander_open = False  # Collapse the expander when going to the next page
-    st.rerun()  # Force immediate rerun to reflect the updated page state
     scroll_to('title')
+    st.rerun()  # Force immediate rerun to reflect the updated page state
 
 current_page = st.session_state.page
 
@@ -279,5 +279,5 @@ if current_page > 0:
     if st.button("Restart", use_container_width=True, key=f"bot_restart_{current_page}"):
         st.session_state.page = 0
         st.session_state.expander_open = False  # Collapse the expander when going to the next page
-        st.rerun()
         scroll_to('title')
+        st.rerun()
