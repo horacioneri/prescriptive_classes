@@ -9,7 +9,9 @@ from page_description import introduction
 # Initialize session state variables
 if "page" not in st.session_state:
     st.session_state.page = 0
-    st.session_state.answers = [0, 0, 0, 0, 0]
+
+if "answers" not in st.session_state:
+    st.session_state.answers = [0] * len(business_units)  # Initialize with zeros for all business units
 
 st.set_page_config(page_title='Understanding optimization', page_icon='')
 
@@ -43,6 +45,7 @@ if 0 < current_page <= len(page_title)-1:
                 key=f"answer_{i}"
             )
 
+# Use session state for answers
 answers = st.session_state.answers
 
 
