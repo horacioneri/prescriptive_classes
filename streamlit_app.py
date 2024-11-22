@@ -123,19 +123,26 @@ if 0 < current_page <= len(page_title)-1:
                 legend = dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
             )
             
-            # Display the plot and capture click events
-            selected_points = plotly_events(
-                fig, 
-                click_event=True,  # Enable click events
-                hover_event=False, # Disable hover events
-                select_event=False # Disable select events
-            )
+            # Create a container for the chart
+            with st.container():
+                # Display the chart using st.plotly_chart for better styling
+                st.plotly_chart(fig, use_container_width=True)
+
+                # Capture click events using plotly_events
+                selected_points = plotly_events(
+                    fig,
+                    click_event=True,  # Enable click events
+                    hover_event=False, # Disable hover events
+                    select_event=False, # Disable select events
+                    override_height=500,  # Consistent sizing
+                    override_width="100%"  # Match st.plotly_chart behavior
+                )
 
             # Check if the user clicked a point
             if selected_points:
                 clicked_x = selected_points[0]["x"]
                 clicked_y = selected_points[0]["y"]
-                st.session_state.answers[i] = clicked_x  # Update answer for the specific business unit
+                st.session_state.answers[i] = clicked_x
                 answers[i] = st.session_state.answers[i]
                 selected_points = []
 
