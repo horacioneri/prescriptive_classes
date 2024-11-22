@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas
+from streamlit_plotly_events import plotly_events
 import plotly.graph_objects as go
 import numpy as np
 from config import page_title, business_units, available_space, linear_space_elasticities, min_space, log_space_elasticities, optimized_answers, max_y_axis, linearization_brackets, bracket_space_elasticity, bracket_space_intercept
@@ -118,8 +119,21 @@ if 0 < current_page <= len(page_title)-1:
                 legend = dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
             )
             
-            # Display the plot in Streamlit
-            st.plotly_chart(fig)
+            # Display the plot and capture click events
+            selected_points = plotly_events(
+                fig, 
+                click_event=True,  # Enable click events
+                hover_event=False, # Disable hover events
+                select_event=False # Disable select events
+            )
+
+            # Check if the user clicked a point
+            if selected_points:
+                clicked_x = selected_points[0]["x"]
+                clicked_y = selected_points[0]["y"]
+                st.session_state.answers[i] = clicked_x  # Update answer for the specific business unit
+                selected_points = []
+
 
     # Summarize the solution found
     st.header('Summary of solution', divider='rainbow')
