@@ -160,7 +160,7 @@ if 0 < current_page <= len(page_title)-1:
     st.text_area(label="Total expected sales:", value=str(round(sales_total,2)), height=68, key=f"sales_{current_page}")
 
     st.header('Optimized solution', divider='rainbow')
-    with st.expander('**Click to see optimized solution**', expanded=st.session_state.expander_open):
+    with st.expander('**Click to see optimized solution**', expanded=False):
         st.markdown('Soluction visualization')
         optmized_values = [0] * len(business_units)
         for i in range(len(business_units)):
