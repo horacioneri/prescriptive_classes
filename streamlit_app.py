@@ -45,7 +45,7 @@ if 0 < current_page <= len(page_title)-1:
         for i in range(len(business_units)):
             st.session_state.answers[i] = st.number_input(
                 f"Insert the space allocated to {business_units[i]} (m²)",
-                value = answers[i],
+                #value = answers[i],
                 key=f"answer_{i}"
             )
 
@@ -125,26 +125,26 @@ if 0 < current_page <= len(page_title)-1:
             
             # Create a container for the chart
             with st.container():
-                # Display the chart using st.plotly_chart for better styling
+                # Capture click events using plotly_events but do not render it
+                #selected_points = plotly_events(
+                #    fig,  # Use the same figure
+                #    click_event=True,  # Enable click events
+                #    hover_event=False,  # Disable hover events
+                #    select_event=False,  # Disable select events
+                #    override_height=500,  # Ensure consistent size
+                #    override_width="100%"  # Match Streamlit container behavior
+                #)
+
+                # Display the chart using Streamlit's optimized layout
                 st.plotly_chart(fig, use_container_width=True)
 
-                # Capture click events using plotly_events
-                selected_points = plotly_events(
-                    fig,
-                    click_event=True,  # Enable click events
-                    hover_event=False, # Disable hover events
-                    select_event=False, # Disable select events
-                    override_height=500,  # Consistent sizing
-                    override_width="100%"  # Match st.plotly_chart behavior
-                )
-
             # Check if the user clicked a point
-            if selected_points:
-                clicked_x = selected_points[0]["x"]
-                clicked_y = selected_points[0]["y"]
-                st.session_state.answers[i] = clicked_x
-                answers[i] = st.session_state.answers[i]
-                selected_points = []
+            #if selected_points:
+            #    clicked_x = selected_points[0]["x"]
+            #    clicked_y = selected_points[0]["y"]
+            #    st.session_state.answers[i] = clicked_x
+            #    answers[i] = st.session_state.answers[i]
+            #    selected_points = []
 
 
     # Summarize the solution found
