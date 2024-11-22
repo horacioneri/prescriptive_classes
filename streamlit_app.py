@@ -23,13 +23,13 @@ answers = st.session_state.answers
 st.set_page_config(page_title='Understanding optimization', page_icon='', layout = 'wide')
 
 #Go to top
-def scroll_to(element_id):
-    components.html(f'''
-        <script>
-            var element = window.parent.document.getElementById("{element_id}");
-            element.scrollIntoView({{behavior: 'smooth'}});
-        </script>
-    '''.encode())
+#def scroll_to(element_id):
+#    components.html(f'''
+#        <script>
+#            var element = window.parent.document.getElementById("{element_id}");
+#            element.scrollIntoView({{behavior: 'smooth'}});
+#        </script>
+#    '''.encode())
 
 # Navigation function with forced rerun
 def change_page(delta):
@@ -280,5 +280,5 @@ if current_page > 0:
     if st.button("Restart", use_container_width=True, key=f"bot_restart_{current_page}"):
         st.session_state.page = 0
         st.session_state.expander_open = False  # Collapse the expander when going to the next page
-        scroll_to('title')
+        #scroll_to('title')
         st.rerun()
