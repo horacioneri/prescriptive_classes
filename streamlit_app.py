@@ -132,6 +132,7 @@ if 0 < current_page <= len(page_title)-1:
                 clicked_x = selected_points[0]["x"]
                 clicked_y = selected_points[0]["y"]
                 st.session_state.answers[i] = clicked_x  # Update answer for the specific business unit
+                answers[i] = st.session_state.answers[i]
                 selected_points = []
 
 
